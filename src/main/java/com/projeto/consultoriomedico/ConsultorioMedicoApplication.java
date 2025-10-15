@@ -84,22 +84,20 @@ public class ConsultorioMedicoApplication implements CommandLineRunner {
             switch (opcao){
                 case "1":
                     Endereco endereco = new Endereco();
-                    System.out.println("Digite o Estado:");
-                    opcao = sc.nextLine();
-                    endereco.setEstado(opcao);
-                    System.out.println("Digite o Cidade:");
-                    opcao = sc.nextLine();
-                    endereco.setCidade(opcao);
-                    System.out.println("Digite a Rua:");
-                    opcao = sc.nextLine();
-                    endereco.setRua(opcao);
-                    System.out.println("Digite o Numero:");
-                    opcao = sc.nextLine();
-                    endereco.setNumero(opcao);
+
                     System.out.println("Digite o CEP:");
                     opcao = sc.nextLine();
-                    endereco.setCep(opcao);
-                    this.enderecoService.criarEndereco(endereco);
+
+                    endereco = this.enderecoService.searchByCep(opcao);
+
+                    System.out.println("Endereço encontrado: ");
+
+                    printEndereco(endereco);
+
+                    System.out.println("Digite o Número:");
+                    opcao = sc.nextLine();
+                    endereco.setNumero(opcao);
+                    printEndereco(this.enderecoService.criarEndereco(endereco));
                     System.out.println("Endereco registrado com sucesso!");
                     break;
                 case "2":
